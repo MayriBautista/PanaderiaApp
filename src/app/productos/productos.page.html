@@ -1,9 +1,54 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>productos</ion-title>
+  <ion-toolbar class="new-background">
+    <ion-buttons slot="start" class="blackText">
+      <ion-back-button defaultHref="inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="blackText">Productos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="center padding-top-10">
+    <ion-item routerLink="/add-producto">
+      <div class="bold padding-left-40">Añadir producto</div>
+      <ion-icon name="add-circle" class="padding-right-40" slot="end"></ion-icon>
+    </ion-item>
+  </div>
+ 
+   <div class="center padding-top-20">
+     <ion-grid>
+       <ion-row>
+         <ion-col class="colGris center">
+           Tipo
+         </ion-col>
+         <ion-col class="colGris center">
+           Descripción
+         </ion-col>
+         <ion-col class="colGris center">
+           Precio
+         </ion-col>
+       </ion-row>
+ 
+       <ion-row *ngFor="let producto of productos">
+         <ion-col>
+          {{producto.tipoProducto}}
+         </ion-col>
+         <ion-col>
+          {{producto.descripcion}}
+         </ion-col>
+         <ion-col>
+          {{producto.precio}}
+           <ion-row>
+            <ion-button (click)="presentAlertConfirm(producto)" size="small" color="danger">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+            <ion-button (click)="actualizar(producto)" size="small" class="new-background">
+              <ion-icon name="create"></ion-icon>
+            </ion-button>
+          </ion-row>
+         </ion-col>
+       </ion-row>
 
+     </ion-grid>
+   </div>
 </ion-content>

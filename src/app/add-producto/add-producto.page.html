@@ -1,9 +1,36 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>add-producto</ion-title>
+  <ion-toolbar class="new-background">
+    <ion-buttons slot="start" class="blackText">
+      <ion-back-button defaultHref="productos"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="blackText">Productos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="center padding-top-10">
+    <div class="bold">Añadir registro de producto</div>
+  </div>
 
+  <div style="text-align: center; padding-left: 2%; padding-right: 2%; padding-top: 5%;">
+    <ion-item style="padding-top: 2%;">      
+      <ion-label>Tipo de producto:</ion-label>
+      <ion-input [(ngModel)]="tipoProducto" placeholder="Ej. Pan grande..."></ion-input>
+    </ion-item>
+
+    <ion-item style="padding-top: 2%;">
+      <ion-label position="stacket">Precio: $ </ion-label>
+      <ion-input [(ngModel)]="precio" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacket">Descripción:</ion-label>
+      <ion-textarea [(ngModel)]="descripcion" placeholder="Ej. Pan dulce..."></ion-textarea>
+    </ion-item>
+    
+    </div>
+
+    <div class="padding-top-20 center padding">
+      <ion-button expand="full" shape="round" class="center bold gris-background" (click)="existeProducto()">Registrar</ion-button>
+    </div>
 </ion-content>

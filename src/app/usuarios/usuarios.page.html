@@ -1,9 +1,85 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>usuarios</ion-title>
+  <ion-toolbar class="new-background">
+    <ion-buttons slot="start" class="blackText">
+      <ion-back-button defaultHref="inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="blackText">Usuarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="center padding-top-10">
+    <div class="bold">Agregar registro de usuario</div>
+  </div>
 
+  <div style="text-align: center; padding-left: 2%; padding-right: 2%;">
+    <ion-item>
+      <ion-label position="floating">Nombre de usuario</ion-label>
+      <ion-input [(ngModel)]="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Teléfono</ion-label>
+      <ion-input [(ngModel)]="telefono" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input [(ngModel)]="contrasena" type="password"></ion-input>
+    </ion-item>
+
+    <ion-item style="padding-top: 8%;">      
+      <ion-label>Tipo de usuario</ion-label>
+        <ion-select [(ngModel)]="tipoUsuario">
+          <ion-select-option value="Administrador">Administrador</ion-select-option>
+          <ion-select-option value="Empleado">Empleado</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="center padding padding-top-10">
+        <ion-button expand="full" shape="round" class="center bold gris-background" (click)="guardarPersona()">Registrar</ion-button>
+      </div>
+
+  <div class="center padding-top-10">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="colGris center dCol">
+          Tipo
+        </ion-col>
+        <ion-col class="colGris center hCol">
+          Usuario
+        </ion-col>
+        <ion-col class="colGris center mCol">
+          Teléfono
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let user of users">
+        <ion-col class="dCol">
+          {{user.tipoUsuario}}
+        </ion-col>
+        <ion-col class="hCol">
+          {{user.nombre}}
+        </ion-col>
+        <ion-col class="mCol">
+          {{user.telefono}}
+          <ion-row>
+            <ion-button (click)="presentAlertConfirm( user )" size="small" color="danger">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+            <ion-button (click)="actualizar( user )" size="small" class="new-background">
+              <ion-icon name="create"></ion-icon>
+            </ion-button>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  
+
+  </div>
 </ion-content>
