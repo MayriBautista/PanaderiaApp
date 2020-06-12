@@ -52,10 +52,6 @@ const routes: Routes = [
     loadChildren: () => import('./add-producto/add-producto.module').then( m => m.AddProductoPageModule)
   },
   {
-    path: 'perfil',
-    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
-  },
-  {
     path: 'add-entrada',
     loadChildren: () => import('./add-entrada/add-entrada.module').then( m => m.AddEntradaPageModule)
   },

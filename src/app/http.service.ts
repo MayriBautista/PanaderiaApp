@@ -156,7 +156,7 @@ export class HttpService {
     });
   }
 
-  //Productos
+  //PRODUCTOS
   eliminarProducto(idProducto: string) {
     var url = this.httpConexion + 'eliminarProducto/' + idProducto;
     return new Promise((resolve, reject) => {
@@ -254,6 +254,67 @@ export class HttpService {
     });
   }
 
+  //PEDIDOS
+  getPedidos(fecha: string) {
+    var url = this.httpConexion + 'getPedidos/'+ fecha + '/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  insertarPedido(idProducto: string, hora: string, fecha: string, cantidad: string, precio:string, total: string, notas: string, estado: string) {
+    var url = this.httpConexion + 'registroPedido/' + idProducto + '/' + hora + '/' + fecha + '/' + cantidad + '/' + precio + '/' + total + '/' + notas + '/' + estado;
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  updatePedido(hora: string, fecha: string, cantidad: string, precio:string, total: string, notas: string, idPedido: string) {
+    var url = this.httpConexion + 'updatePedido/' + hora + '/' + fecha + '/' + cantidad + '/' + precio + '/' + total + '/' + notas + '/' + idPedido;
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  eliminarPedido(idPedido: string) {
+    var url = this.httpConexion + 'eliminarPedido/' + idPedido;
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  pedidoEntregado(estado: string, idPedido: string, cantidad: string, idProducto:string) {
+    var url = this.httpConexion + 'pedidoEntregado/' + estado + '/' + idPedido + '/' + cantidad + '/' + idProducto + '/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
   //GASTOS
   mostrarGastos() {
     var url = this.httpConexion + 'mostrarG/';
@@ -291,8 +352,8 @@ export class HttpService {
     });
   }
 
-  updateGasto(descripcion: string, idUsuario: string, total: string, idGasto:string) {
-    var url = this.httpConexion + 'updateGasto/' + descripcion + '/' + idUsuario + '/' + total + '/' + idGasto + '/';
+  updateGasto(descripcion: string, total: string, idGasto:string) {
+    var url = this.httpConexion + 'updateGasto/' + descripcion + '/' + total + '/' + idGasto + '/';
     return new Promise((resolve, reject) => {
       this.http.get(url)
         .subscribe(data => {

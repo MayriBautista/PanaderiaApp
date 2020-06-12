@@ -121,14 +121,7 @@ export class GastosPage implements OnInit {
           placeholder: 'Descripción',
           value: gasto.descripcion,
           type: 'text'
-        },
-        {
-          label: 'Responsable',
-          name: 'idUsuario',
-          placeholder: 'Responsable',
-          value: gasto.nombre,
-          type: 'text'
-        },        
+        },   
         {
           label:'Total',
           name: 'total',
@@ -148,7 +141,7 @@ export class GastosPage implements OnInit {
         {
           text: 'Guardar',
           handler: data => {
-            this.modificar(data.descripcion,gasto.idUsuario,data.total,gasto.idGasto);
+            this.modificar(data.descripcion,data.total,gasto.idGasto);
           }
         }
       ]
@@ -156,8 +149,8 @@ export class GastosPage implements OnInit {
     (await alert).present();
   }
 
-  modificar(descripcion,idUsuario,total,idGasto){
-    this.http.updateGasto(descripcion,idUsuario,total,idGasto).then(
+  modificar(descripcion,total,idGasto){
+    this.http.updateGasto(descripcion,total,idGasto).then(
       (inv) => {
         console.log(inv);
         var estado = inv['resultado'];
