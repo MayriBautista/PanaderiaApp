@@ -55,6 +55,10 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'add-entrada',
+    loadChildren: () => import('./add-entrada/add-entrada.module').then( m => m.AddEntradaPageModule)
+  },
 ];
 
 @NgModule({

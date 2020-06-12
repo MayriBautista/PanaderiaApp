@@ -1,9 +1,37 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>add-gasto</ion-title>
+  <ion-toolbar class="new-background">
+    <ion-buttons slot="start" class="blackText">
+      <ion-back-button defaultHref="gastos"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="blackText">Gastos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div style="padding-top: 5%;" class="left bold padding-top-90 padding-left blackText">Hoy: 
+    <ion-label>{{ fecha | date: 'dd-MM-yyyy'}}</ion-label></div>
 
+  <div style="text-align: center; padding-left: 2%; padding-right: 2%; padding-top: 5%;">
+    <ion-item style="padding-top: 2%;">      
+      <ion-label>Responsable</ion-label>
+        <ion-select [(ngModel)]="idUsuario" value="nada" okText="Seleccionar" cancelText="Cancelar">
+          <ion-select-option *ngFor="let usuario of users" value="{{usuario.idUsuario}}">{{usuario.nombre}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item style="padding-top: 2%;">
+      <ion-label position="stacket">Total: $ </ion-label>
+      <ion-input [(ngModel)]="total" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacket">Descripción</ion-label>
+      <ion-textarea [(ngModel)]="descripcion" placeholder="Ingresa la descripción aquí..."></ion-textarea>
+    </ion-item>
+    
+    </div>
+
+    <div class="padding-top-20 center padding">
+      <ion-button expand="full" shape="round" class="center bold gris-background" (click)="guardarGasto()">Registrar</ion-button>
+    </div>
 </ion-content>

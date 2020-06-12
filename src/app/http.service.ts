@@ -192,4 +192,138 @@ export class HttpService {
         });
     });
   }
+
+  updateProducto(tipoProducto: string, descripcion: string, precio: string, idUsuario:string) {
+    var url = this.httpConexion + 'updateProducto/' + tipoProducto + '/' + descripcion + '/' + precio + '/' + idUsuario + '/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  //ENTRADAS $idProducto,$cantidad,$precio,$fecha,$total
+  insertarEntrada(idProducto: string, cantidad: string, precio: string, fecha: string, total: string) {
+    var url = this.httpConexion + 'registroEntrada/' + idProducto + '/' + cantidad + '/' + precio + '/' + fecha+ '/' + total;
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  getEntradas(fecha: string) {
+    var url = this.httpConexion + 'getEntradas/' + fecha + '/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  mostrarTotal(fecha:string) {
+    var url = this.httpConexion + 'mostrarTotal/'+ fecha;
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  eliminarEntrada(idEntrada: string, cantidad: string, idProducto: string) {
+    var url = this.httpConexion + 'eliminarEntrada/' + idEntrada + '/' + cantidad + '/' + idProducto;
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  //GASTOS
+  mostrarGastos() {
+    var url = this.httpConexion + 'mostrarG/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  getGasto(fecha: string) {
+    var url = this.httpConexion + 'getGasto/' + fecha + '/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  eliminarGasto(idGasto: string) {
+    var url = this.httpConexion + 'eliminarGasto/' + idGasto;
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  updateGasto(descripcion: string, idUsuario: string, total: string, idGasto:string) {
+    var url = this.httpConexion + 'updateGasto/' + descripcion + '/' + idUsuario + '/' + total + '/' + idGasto + '/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  insertarGasto(idUsuario: string, fecha: string, total: string, descripcion: string) {
+    var url = this.httpConexion + 'registroGasto/' + idUsuario + '/' + fecha+ '/' + total+ '/' + descripcion;
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  mostrarTotalG(fecha:string) {
+    var url = this.httpConexion + 'mostrarTotalG/'+ fecha;
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 }

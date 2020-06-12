@@ -1,9 +1,70 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>gastos</ion-title>
+  <ion-toolbar class="new-background">
+    <ion-buttons slot="start" class="blackText">
+      <ion-back-button defaultHref="inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="blackText">Gastos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="center padding-top-10">
+    <ion-item routerLink="/add-gasto">
+      <div class="bold padding-left-40">Añadir gasto</div>
+      <ion-icon name="add-circle" class="padding-right-40" slot="end"></ion-icon>
+    </ion-item>
+  </div>
 
+  <div class="left bold padding-top-20 padding-left blackText">Hoy: 
+    <ion-label>{{ fecha | date: 'yyyy-MM-dd'}}</ion-label></div>
+ 
+   <div class="center padding-top-20">
+     <ion-grid>
+       <ion-row>
+         <ion-col class="colGris center">
+           Descripción
+         </ion-col>
+         <ion-col class="colGris center">
+           Responsable
+         </ion-col>
+         <ion-col class="colGris center">
+           Total
+         </ion-col>
+       </ion-row>
+ 
+       <ion-row *ngFor="let gasto of gastos">
+         <ion-col>
+          {{gasto.descripcion}}
+         </ion-col>
+         <ion-col>
+          {{gasto.nombre}}
+         </ion-col>
+         <ion-col>
+          ${{gasto.total}}
+           <ion-row>
+            <ion-button (click)="presentAlertEliminar(gasto)" size="small" color="danger">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+            <ion-button (click)="actualizar( gasto )" size="small" class="new-background">
+              <ion-icon name="create"></ion-icon>
+            </ion-button>
+          </ion-row>
+         </ion-col>
+       </ion-row>
+       <ion-row>
+        <ion-col>
+          
+        </ion-col>
+        <ion-col class="bold colGris">
+          Total: 
+        </ion-col>
+        <ion-col class="bold colGris">
+          {{t}}
+        </ion-col>
+      </ion-row>
+     </ion-grid>
+   </div>
 </ion-content>

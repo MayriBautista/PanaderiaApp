@@ -20,6 +20,15 @@ export class ProductosPage implements OnInit {
     this.mostrarDatos();
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.mostrarDatos();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 500);
+  }
+
   ngOnInit() {
   }
 
@@ -87,6 +96,70 @@ export class ProductosPage implements OnInit {
       duration: 4000
     });
     toast.present();
+  }
+
+  async actualizar( producto ) {
+    let alert = this.alertController.create({
+      header: 'Actualizar',
+      inputs: [
+        {
+          label: 'Producto',
+          name: 'tipoProducto',
+          placeholder: 'Producto',
+          value: producto.tipoProducto,
+          type: 'text'
+        },
+        {
+          label: 'Descripción',
+          name: 'descripcion',
+          placeholder: 'Descripción',
+          value: producto.descripcion,
+          type: 'text'
+        },
+        {
+          label:'Precio',
+          name: 'precio',
+          placeholder: 'Precio',
+          value: producto.precio,
+          type: 'text'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancelar');
+          }
+        },
+        {
+          text: 'Guardar',
+          handler: data => {
+            this.modificar(data.tipoProducto,data.descripcion,data.precio,producto.idProducto);
+          }
+        }
+      ]
+    });
+    (await alert).present();
+  }
+
+  modificar(tipoProducto,descripcion,precio,idProducto){
+    this.http.updateProducto(tipoProducto,descripcion,precio,idProducto).then(
+      (inv) => {
+        console.log(inv);
+        var estado = inv['resultado'];
+        if (estado == "actualizado"){
+          this.alerta("Actualizado con éxito.");
+          this.mostrarDatos();
+        } else {
+          this.alerta("No se pudo modificar, intente mas tarde");
+        }
+      },
+      (error) => {
+        console.log("Error" + JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
+      }
+    );
   }
 
 }

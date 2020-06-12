@@ -46,25 +46,25 @@
   <div class="center padding-top-10">
     <ion-grid>
       <ion-row>
-        <ion-col class="colGris center dCol">
+        <ion-col class="colGris center">
           Tipo
         </ion-col>
-        <ion-col class="colGris center hCol">
+        <ion-col class="colGris center">
           Usuario
         </ion-col>
-        <ion-col class="colGris center mCol">
+        <ion-col class="colGris center">
           Teléfono
         </ion-col>
       </ion-row>
 
       <ion-row *ngFor="let user of users">
-        <ion-col class="dCol">
+        <ion-col>
           {{user.tipoUsuario}}
         </ion-col>
-        <ion-col class="hCol">
+        <ion-col>
           {{user.nombre}}
         </ion-col>
-        <ion-col class="mCol">
+        <ion-col>
           {{user.telefono}}
           <ion-row>
             <ion-button (click)="presentAlertConfirm( user )" size="small" color="danger">

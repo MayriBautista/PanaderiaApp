@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar class="new-background">
+    <ion-buttons slot="start" class="blackText">
+      <ion-back-button defaultHref="entradas"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="blackText">Entradas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="padding-top: 5%;" class="left bold padding-top-90 padding-left blackText">Hoy: 
+    <ion-label>{{ fecha | date: 'dd-MM-yyyy'}}</ion-label></div>
+
+  <div style="text-align: center; padding-left: 2%; padding-right: 2%; padding-top: 5%;">
+    
+    <ion-item style="padding-top: 2%;">      
+      <ion-label>Producto</ion-label>
+        <ion-select [(ngModel)]="valor" value="nada" okText="Seleccionar" cancelText="Cancelar">
+          <ion-select-option *ngFor="let producto of productos" value="{{producto.idProducto}}">{{producto.tipoProducto}}</ion-select-option>
+        </ion-select>
+        <ion-button expand="block" shape="round" class="center bold gris-background" (click)="mostrarP(valor)">Producto</ion-button>
+    </ion-item>
+
+    <ion-item style="padding-top: 2%;">
+      <ion-label position="stacket">Precio: $</ion-label>
+      <ion-input [(ngModel)]="precio" type="number" value="{{precio}}"></ion-input>
+    </ion-item>
+
+    <ion-item style="padding-top: 2%;">
+      <ion-label position="stacket">Cantidad: </ion-label>
+      <ion-input [(ngModel)]="cantidad" type="number"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="padding-top-30 center padding">
+    <ion-button expand="block" shape="round" class="center bold gris-background" (click)="insertarEntrada(valor)">Añadir</ion-button>
+  </div>
+</ion-content>

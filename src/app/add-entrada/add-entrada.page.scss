@@ -7,8 +7,9 @@
   *{
       color: black;
   }
-  .logo{
+  .logoMenu{
     width: 60%;
+    margin: 1%;
     float: center;
   }
   .center {
@@ -45,12 +46,6 @@
   .no-padding-top {
     padding-top: 0px;
   }
-  .padding-left-40 {
-    padding-left: 40px;
-  }
-  .padding-right-40 {
-    padding-right: 40px;
-  }
   .bold {
     font-weight: 550
   }
@@ -72,24 +67,4 @@
   }
   .gris-background{
     --background: rgb(196, 196, 196);
-  }
-  .mCol{
-    min-width: 60px;
-    max-width: 90px;
-    padding: 5px;
-  }
-  .dCol{
-    min-width: 110px;
-    max-width: 120px;
-    padding: 5px;
-  }
-  .hCol{
-    min-width: 60px;
-    max-width: 80px;
-    padding: 5px;
-  }
-  .colGris{
-    background-color: rgb(196, 196, 196);  
-    padding: 5px;
-    margin: 1px;
   }

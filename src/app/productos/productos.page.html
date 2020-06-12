@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="center padding-top-10">
     <ion-item routerLink="/add-producto">
       <div class="bold padding-left-40">Añadir producto</div>
@@ -27,6 +30,9 @@
          <ion-col class="colGris center">
            Precio
          </ion-col>
+         <ion-col class="colGris center">
+          Totales
+        </ion-col>
        </ion-row>
  
        <ion-row *ngFor="let producto of productos">
@@ -38,6 +44,9 @@
          </ion-col>
          <ion-col>
           {{producto.precio}}
+         </ion-col>
+         <ion-col>
+          {{producto.stock}}
            <ion-row>
             <ion-button (click)="presentAlertConfirm(producto)" size="small" color="danger">
               <ion-icon name="trash"></ion-icon>
