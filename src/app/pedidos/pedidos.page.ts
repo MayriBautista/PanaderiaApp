@@ -39,7 +39,7 @@ export class PedidosPage implements OnInit {
 
   pedidos:any;
   mostrarDatos(){
-    this.http.getPedidos(this.fecha).then( 
+    this.http.getPedidos().then( 
       (res) => {
         console.log(res);
          this.pedidos=res;

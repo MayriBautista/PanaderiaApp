@@ -16,13 +16,13 @@
     <ion-grid>
       <ion-row>
         <ion-col class="colGris center">
-          Producto
+          Fecha
         </ion-col>
         <ion-col class="colGris center">
-          Cantidad
+          No. Venta
         </ion-col>
         <ion-col class="colGris center">
-          Precio
+          Vendedor
         </ion-col>
         <ion-col class="colGris center">
           Total
@@ -31,16 +31,16 @@
 
       <ion-row *ngFor="let venta of ventas">
         <ion-col>
-          {{venta.tipoProducto}}
+          {{venta.fecha}}
         </ion-col>
         <ion-col>
-          {{venta.cantidad}}
+          {{venta.idVenta}}
         </ion-col>
         <ion-col>
-          {{venta.precio}}
+          {{venta.nombre}}
         </ion-col>
         <ion-col>
-          {{venta.subtotal}}
+          {{venta.total}}
         </ion-col>
       </ion-row>
 
@@ -63,7 +63,7 @@
 
   <ion-item class="padding-top-10 bold">
     <ion-label>Total: </ion-label>
-    <ion-label>$ 122.5</ion-label> 
+    <ion-label>{{t}}</ion-label> 
   </ion-item>
 
   <div class="center padding-top-30">

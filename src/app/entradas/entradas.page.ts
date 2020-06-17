@@ -43,7 +43,7 @@ export class EntradasPage implements OnInit {
 
   prod:any;
   getEntradas() {
-    this.http.getEntradas(this.fecha).then(
+    this.http.mostrarEntradas().then(
       (inv) => {
         console.log(inv);
         this.prod = inv;
@@ -51,7 +51,7 @@ export class EntradasPage implements OnInit {
   }
 
   mostrarTotalE(){
-    this.http.mostrarTotalE(this.fecha).then( 
+    this.http.mostrarTotalE().then( 
       (res) => {
         console.log(res);
         this.t = res;

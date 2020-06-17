@@ -39,7 +39,7 @@ export class GastosPage implements OnInit {
 
   gastos:any;
   getGasto() {
-    this.http.getGasto(this.fecha).then(
+    this.http.getGasto().then(
       (inv) => {
         console.log(inv);
         this.gastos = inv;
@@ -47,7 +47,7 @@ export class GastosPage implements OnInit {
   }
 
   mostrarTotalG(){
-    this.http.mostrarTotalG(this.fecha).then( 
+    this.http.mostrarTotalG().then( 
       (res) => {
         console.log(res);
         this.t = res;

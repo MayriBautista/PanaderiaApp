@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';//IMPORTAR
 export class HttpService {
   constructor(public http: HttpClient) { }
 
+  //httpConexion = "https://loschenchos.000webhostapp.com/panaderiaLaravel/";
   httpConexion = "http://127.0.0.1:8000/";
 
   //LOGIN
@@ -254,8 +255,20 @@ export class HttpService {
     });
   }
 
-  mostrarTotalE(fecha:string) {
-    var url = this.httpConexion + 'mostrarTotal/'+ fecha;
+  mostrarEntradas() {
+    var url = this.httpConexion + 'mostrarEntradas/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  mostrarTotalE() {
+    var url = this.httpConexion + 'mostrarTotalE/';
     return new Promise((resolve, reject) => {
       this.http.get(url)
         .subscribe(data => {
@@ -279,8 +292,8 @@ export class HttpService {
   }
 
   //PEDIDOS
-  getPedidos(fecha: string) {
-    var url = this.httpConexion + 'getPedidos/'+ fecha + '/';
+  getPedidos() {
+    var url = this.httpConexion + 'getPedidos/';
     return new Promise((resolve, reject) => {
       this.http.get(url)
         .subscribe(data => {
@@ -364,8 +377,8 @@ export class HttpService {
     });
   }
 
-  getGasto(fecha: string) {
-    var url = this.httpConexion + 'getGasto/' + fecha + '/';
+  getGasto() {
+    var url = this.httpConexion + 'getGasto/';
     return new Promise((resolve, reject) => {
       this.http.get(url)
         .subscribe(data => {
@@ -412,8 +425,8 @@ export class HttpService {
     });
   }
 
-  mostrarTotalG(fecha:string) {
-    var url = this.httpConexion + 'mostrarTotalG/'+ fecha;
+  mostrarTotalG() {
+    var url = this.httpConexion + 'mostrarTotalG/';
     return new Promise((resolve, reject) => {
       this.http.get(url)
         .subscribe(data => {
@@ -436,4 +449,17 @@ export class HttpService {
         });
     });
   }
+
+  mostrarTotalV() {
+    var url = this.httpConexion + 'mostrarTotalV/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
 }

@@ -18,12 +18,12 @@
       </ion-item>
     </div>
 
-    <div class="left bold padding-top-20 padding-left blackText">Hoy: 
-      <ion-label>{{ fecha | date: 'yyyy-MM-dd'}}</ion-label></div>
-  
     <div class="center padding-top-20">
       <ion-grid>
         <ion-row>
+          <ion-col class="colGris center">
+            Fecha
+          </ion-col>
           <ion-col class="colGris center">
             Tipo
           </ion-col>
@@ -39,6 +39,9 @@
         </ion-row>
   
         <ion-row *ngFor="let p of prod">
+          <ion-col>
+            {{p.fecha}}
+          </ion-col>
           <ion-col>
             {{p.tipoProducto}}
           </ion-col>

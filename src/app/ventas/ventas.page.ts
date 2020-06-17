@@ -22,6 +22,7 @@ export class VentasPage implements OnInit {
   ) { 
     this.mostrarDatos();
     this.ventasTotales();
+    this.mostrarTotalV();
   }
 
   ngOnInit() {
@@ -45,6 +46,20 @@ export class VentasPage implements OnInit {
       (res) => {
         console.log(res);
          this.ventas=res;
+      },
+      (error) => {
+        console.log("Error" + JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
+      }
+    );
+  }
+
+  t:any;
+  mostrarTotalV(){
+    this.http.mostrarTotalV().then( 
+      (res) => {
+        console.log(res);
+        this.t = res;
       },
       (error) => {
         console.log("Error" + JSON.stringify(error));
