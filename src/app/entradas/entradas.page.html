@@ -25,13 +25,13 @@
       <ion-grid>
         <ion-row>
           <ion-col class="colGris center">
+            Tipo
+          </ion-col>
+          <ion-col class="colGris center">
             Cantidad
           </ion-col>
           <ion-col class="colGris center">
             Precio
-          </ion-col>
-          <ion-col class="colGris center">
-            Tipo
           </ion-col>
           <ion-col class="colGris center">
             Total
@@ -40,22 +40,19 @@
   
         <ion-row *ngFor="let p of prod">
           <ion-col>
+            {{p.tipoProducto}}
+          </ion-col>
+          <ion-col>
             {{p.cantidad}}
           </ion-col>
           <ion-col>
             {{p.precio}}
           </ion-col>
           <ion-col>
-            {{p.tipoProducto}}
-          </ion-col>
-          <ion-col>
             {{p.total}}
             <ion-row>
               <ion-button (click)="presentAlertConfirm(p)" size="small" color="danger">
                 <ion-icon name="trash"></ion-icon>
-              </ion-button>
-              <ion-button (click)="actualizar(p)" size="small" class="new-background">
-                <ion-icon name="create"></ion-icon>
               </ion-button>
             </ion-row>
           </ion-col>

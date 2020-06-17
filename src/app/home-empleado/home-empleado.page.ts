@@ -7,13 +7,12 @@ import { ActivatedRoute } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
-
 @Component({
-  selector: 'app-inicio',
-  templateUrl: './inicio.page.html',
-  styleUrls: ['./inicio.page.scss'],
+  selector: 'app-home-empleado',
+  templateUrl: './home-empleado.page.html',
+  styleUrls: ['./home-empleado.page.scss'],
 })
-export class InicioPage implements OnInit {
+export class HomeEmpleadoPage implements OnInit {
 
   fechaC: string = new Date().toISOString();
   fecha: string = this.fechaC;
@@ -55,6 +54,9 @@ export class InicioPage implements OnInit {
     this.getVenta(this.idVenta);
   }
 
+  ngOnInit() {
+  }
+  
   ionViewWillenter() {
     this.getNewID();
   }
@@ -79,9 +81,6 @@ export class InicioPage implements OnInit {
       console.log('Async operation has ended');
       event.target.complete();
     }, 1000);
-  }
-
-  ngOnInit() {
   }
 
   registrarVentaP(idVenta){

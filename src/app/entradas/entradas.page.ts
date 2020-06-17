@@ -26,7 +26,7 @@ export class EntradasPage implements OnInit {
     public toastController: ToastController
   ) { 
     this.getEntradas();
-    this.mostrarTotal();
+    this.mostrarTotalE();
   }
 
   ngOnInit() {
@@ -50,8 +50,8 @@ export class EntradasPage implements OnInit {
       });
   }
 
-  mostrarTotal(){
-    this.http.mostrarTotal(this.fecha).then( 
+  mostrarTotalE(){
+    this.http.mostrarTotalE(this.fecha).then( 
       (res) => {
         console.log(res);
         this.t = res;
@@ -95,6 +95,8 @@ export class EntradasPage implements OnInit {
         var estado = inv['resultado'];
         if (estado == "eliminado"){
           this.alerta("Eliminado correctamente");
+          this.getEntradas();
+          this.mostrarTotalE();
         } else {
           this.alerta("No se pudo eliminar, intente mas tarde");
         }

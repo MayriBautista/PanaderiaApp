@@ -5,14 +5,14 @@ import { ToastController } from '@ionic/angular';
 import { HttpService } from '../http.service';
 
 @Component({
-  selector: 'app-productos',
-  templateUrl: './productos.page.html',
-  styleUrls: ['./productos.page.scss'],
+  selector: 'app-all-pedido',
+  templateUrl: './all-pedido.page.html',
+  styleUrls: ['./all-pedido.page.scss'],
 })
-export class ProductosPage implements OnInit {
+export class AllPedidoPage implements OnInit {
 
-  t:any;
-  
+  estado: any = "Entregado";
+
   constructor(
     public http:HttpService,
     public alertController: AlertController,
@@ -20,7 +20,6 @@ export class ProductosPage implements OnInit {
     public toastController: ToastController
   ) { 
     this.mostrarDatos();
-    this.mostrarTotalP();
   }
 
   doRefresh(event) {
@@ -35,25 +34,12 @@ export class ProductosPage implements OnInit {
   ngOnInit() {
   }
 
-  mostrarTotalP(){
-    this.http.mostrarTotalP().then( 
-      (res) => {
-        console.log(res);
-        this.t = res;
-      },
-      (error) => {
-        console.log("Error" + JSON.stringify(error));
-        alert("Verifica que cuentes con internet");
-      }
-    );
-  }
-
-  productos:any;
+  pedidos:any;
   mostrarDatos(){
-    this.http.mostrarProductos().then( 
+    this.http.mostrarPedidos().then( 
       (res) => {
         console.log(res);
-         this.productos=res;
+         this.pedidos=res;
       },
       (error) => {
         console.log("Error" + JSON.stringify(error));
@@ -62,10 +48,10 @@ export class ProductosPage implements OnInit {
     );
   }
 
-  async presentAlertConfirm(producto) {
+  async presentAlertEntregar(pedido) {
     const alert = await this.alertController.create({
-      header: 'Confirmar eliminación de registro',
-      message: '¿Está seguro de eliminar de forma permanente?',
+      header: '¿Está seguro de que se ha entregado el producto?',
+      message: 'La cantidad de producto se descontará del inventario',
       buttons: [
         {
           text: 'Cancelar',
@@ -78,7 +64,7 @@ export class ProductosPage implements OnInit {
           text: 'Aceptar',
           handler: () => {
             console.log('Confirm Okay');
-            this.eliminar(producto);
+            this.pedidoEntregado(pedido);
           }
         }
       ]
@@ -87,23 +73,39 @@ export class ProductosPage implements OnInit {
     await alert.present();
   }
 
-  eliminar(producto){
-    this.http.eliminarProducto(producto.idProducto).then(
+  pedidoEntregado(pedido){
+    console.log(this.estado);
+    this.http.pedidoEntregado(this.estado,pedido.idPedido,pedido.cantidad,pedido.idProducto).then(
       (inv) => {
         console.log(inv);
-        var estado = inv['resultado'];
-        if (estado == "eliminado"){
-          this.alerta("Eliminado correctamente");
+        var resultado;
+
+        resultado = inv['resultado'];
+        if(resultado == "insertado"){
+ 
+          this.mensajeToast("Pedido entregado, se ha descontado la cantidad de productos de inventario.");
+          this.route.navigateByUrl('/all-pedido');
           this.mostrarDatos();
-        } else {
-          this.alerta("No se pudo eliminar, intente mas tarde");
+ 
+        }else{
+          this.mensajeToast("A ocurrido un error intenta mas tarde");
         }
       },
-      (error) => {
-        console.log("Error" + JSON.stringify(error));
+      (error) =>{
+        console.log("Error"+JSON.stringify(error));
         alert("Verifica que cuentes con internet");
       }
     );
+  }
+
+  async mensajeToast(mensaje:string){
+    const toast = await this.toastController.create({
+      message: mensaje,
+      position: 'top',
+      duration: 2000
+    });
+    toast.present();
+
   }
 
   async alerta(mensaje) {
@@ -115,29 +117,50 @@ export class ProductosPage implements OnInit {
     toast.present();
   }
 
-  async actualizar( producto ) {
+  async actualizar( pedido ) {
     let alert = this.alertController.create({
       header: 'Actualizar',
       inputs: [
         {
-          label: 'Producto',
-          name: 'tipoProducto',
-          placeholder: 'Producto',
-          value: producto.tipoProducto,
+          label: 'Hora',
+          name: 'hora',
+          placeholder: 'Hora',
+          value: pedido.hora,
           type: 'text'
         },
         {
-          label: 'Descripción',
-          name: 'descripcion',
-          placeholder: 'Descripción',
-          value: producto.descripcion,
+          label:'Fecha',
+          name: 'fecha',
+          placeholder: 'Fecha',
+          value: pedido.fecha,
+          type: 'text'
+        },
+        {
+          label:'Cantidad',
+          name: 'cantidad',
+          placeholder: 'Cantidad',
+          value: pedido.cantidad,
           type: 'text'
         },
         {
           label:'Precio',
           name: 'precio',
           placeholder: 'Precio',
-          value: producto.precio,
+          value: pedido.precio,
+          type: 'text'
+        },
+        {
+          label:'Total',
+          name: 'total',
+          placeholder: 'Total',
+          value: pedido.total,
+          type: 'text'
+        },
+        {
+          label:'Detalles',
+          name: 'notas',
+          placeholder: 'Detalles',
+          value: pedido.notas,
           type: 'text'
         }
       ],
@@ -152,7 +175,7 @@ export class ProductosPage implements OnInit {
         {
           text: 'Guardar',
           handler: data => {
-            this.modificar(data.tipoProducto,data.descripcion,data.precio,producto.idProducto);
+            this.modificar(data.hora,data.fecha,data.cantidad,data.precio,data.total,data.notas,pedido.idPedido);
           }
         }
       ]
@@ -160,8 +183,8 @@ export class ProductosPage implements OnInit {
     (await alert).present();
   }
 
-  modificar(tipoProducto,descripcion,precio,idProducto){
-    this.http.updateProducto(tipoProducto,descripcion,precio,idProducto).then(
+  modificar(hora,fecha,cantidad,precio,total,notas,idPedido){
+    this.http.updatePedido(hora,fecha,cantidad,precio,total,notas,idPedido).then(
       (inv) => {
         console.log(inv);
         var estado = inv['resultado'];
@@ -178,5 +201,4 @@ export class ProductosPage implements OnInit {
       }
     );
   }
-
 }

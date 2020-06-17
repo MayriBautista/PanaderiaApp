@@ -18,6 +18,7 @@ export class AddEntradaPage implements OnInit {
   precio:any;
   cantidad:any = "1";
   idProducto:string;
+  notas:string;
 
   constructor(
     private menu: MenuController,
@@ -99,7 +100,7 @@ export class AddEntradaPage implements OnInit {
   async presentAlert(total) {
     const alert = await this.alertController.create({
       header: 'Total',
-      message: 'El total de la compra es: '+total,
+      message: 'El total de la entrada es: '+total,
       buttons: [
         {
           text: 'Aceptar',

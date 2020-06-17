@@ -1,9 +1,94 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>ventas</ion-title>
+  <ion-toolbar class="new-background">
+    <ion-buttons slot="start" class="blackText">
+      <ion-back-button defaultHref="inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="blackText">Vendidos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="center padding-top-10">
+   <div class="bold">Ventas del día</div>
+  </div>
 
+  <div class="center padding-top-20">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="colGris center">
+          Producto
+        </ion-col>
+        <ion-col class="colGris center">
+          Cantidad
+        </ion-col>
+        <ion-col class="colGris center">
+          Precio
+        </ion-col>
+        <ion-col class="colGris center">
+          Total
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let venta of ventas">
+        <ion-col>
+          {{venta.tipoProducto}}
+        </ion-col>
+        <ion-col>
+          {{venta.cantidad}}
+        </ion-col>
+        <ion-col>
+          {{venta.precio}}
+        </ion-col>
+        <ion-col>
+          {{venta.subtotal}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          
+        </ion-col>
+        <ion-col>
+          
+        </ion-col>
+        <ion-col>
+          
+        </ion-col>
+        <ion-col>
+          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-item class="padding-top-10 bold">
+    <ion-label>Total: </ion-label>
+    <ion-label>$ 122.5</ion-label> 
+  </ion-item>
+
+  <div class="center padding-top-30">
+    <div class="bold">Restantes del día</div>
+   </div>
+
+   <div class="center padding-top-20">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="colGris center">
+          Producto
+        </ion-col>
+        <ion-col class="colGris center">
+          Restantes
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let producto of productos">
+        <ion-col>
+          {{producto.tipoProducto}}
+        </ion-col>
+        <ion-col>
+          {{producto.stock}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

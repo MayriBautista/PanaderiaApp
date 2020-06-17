@@ -57,6 +57,7 @@ export class UsuariosPage implements OnInit {
  
           this.mensajeToast("Usuario registrado correctamente.");
           this.route.navigateByUrl('/usuarios');
+          this.mostrarDatos();
  
         }else{
           this.mensajeToast("A ocurrido un error intenta mas tarde");
@@ -158,6 +159,7 @@ export class UsuariosPage implements OnInit {
         var estado = inv['resultado'];
         if (estado == "eliminado"){
           this.alerta("Eliminado correctamente");
+          this.mostrarDatos();
         } else {
           this.alerta("No se pudo eliminar, intente mas tarde");
         }

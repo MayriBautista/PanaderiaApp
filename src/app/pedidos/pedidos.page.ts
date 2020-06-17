@@ -88,6 +88,7 @@ export class PedidosPage implements OnInit {
  
           this.mensajeToast("Pedido entregado, se ha descontado la cantidad de productos de inventario.");
           this.route.navigateByUrl('/pedidos');
+          this.mostrarDatos();
  
         }else{
           this.mensajeToast("A ocurrido un error intenta mas tarde");
@@ -180,7 +181,7 @@ export class PedidosPage implements OnInit {
           placeholder: 'Fecha',
           value: pedido.fecha,
           type: 'text'
-        },
+        },        
         {
           label:'Cantidad',
           name: 'cantidad',

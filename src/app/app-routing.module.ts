@@ -55,6 +55,14 @@ const routes: Routes = [
     path: 'add-entrada',
     loadChildren: () => import('./add-entrada/add-entrada.module').then( m => m.AddEntradaPageModule)
   },
+  {
+    path: 'all-pedido',
+    loadChildren: () => import('./all-pedido/all-pedido.module').then( m => m.AllPedidoPageModule)
+  },
+  {
+    path: 'home-empleado',
+    loadChildren: () => import('./home-empleado/home-empleado.module').then( m => m.HomeEmpleadoPageModule)
+  },
 ];
 
 @NgModule({

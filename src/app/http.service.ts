@@ -107,6 +107,18 @@ export class HttpService {
     });
   }
 
+  eliminarSV(idSVenta: string, cantidad:string, idProducto:string) {
+    var url = this.httpConexion + 'eliminarSV/' + idSVenta + '/' + cantidad + '/' + idProducto;
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
   //USUARIOS
   insertar(nombre: string, telefono: string, contrasena: string, tipoUsuario: string) {
     var url = this.httpConexion + 'registro/' + nombre + '/' + telefono+ '/' + contrasena+ '/' + tipoUsuario;
@@ -205,6 +217,18 @@ export class HttpService {
     });
   }
 
+  mostrarTotalP() {
+    var url = this.httpConexion + 'mostrarTotalP/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
   //ENTRADAS $idProducto,$cantidad,$precio,$fecha,$total
   insertarEntrada(idProducto: string, cantidad: string, precio: string, fecha: string, total: string) {
     var url = this.httpConexion + 'registroEntrada/' + idProducto + '/' + cantidad + '/' + precio + '/' + fecha+ '/' + total;
@@ -230,7 +254,7 @@ export class HttpService {
     });
   }
 
-  mostrarTotal(fecha:string) {
+  mostrarTotalE(fecha:string) {
     var url = this.httpConexion + 'mostrarTotal/'+ fecha;
     return new Promise((resolve, reject) => {
       this.http.get(url)
@@ -257,6 +281,18 @@ export class HttpService {
   //PEDIDOS
   getPedidos(fecha: string) {
     var url = this.httpConexion + 'getPedidos/'+ fecha + '/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  mostrarPedidos() {
+    var url = this.httpConexion + 'mostrarPedidos/';
     return new Promise((resolve, reject) => {
       this.http.get(url)
         .subscribe(data => {
@@ -378,6 +414,19 @@ export class HttpService {
 
   mostrarTotalG(fecha:string) {
     var url = this.httpConexion + 'mostrarTotalG/'+ fecha;
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  //VENTAS
+  ventasTotales() {
+    var url = this.httpConexion + 'ventasTotales/';
     return new Promise((resolve, reject) => {
       this.http.get(url)
         .subscribe(data => {

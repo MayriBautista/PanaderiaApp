@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="new-background">
     <ion-buttons slot="start" class="blackText">
-      <ion-back-button defaultHref="inicio"></ion-back-button>
+      <ion-back-button defaultHref="pedidos"></ion-back-button>
     </ion-buttons>
     <ion-title class="blackText">Pedidos</ion-title>
   </ion-toolbar>
@@ -17,14 +17,7 @@
       <ion-icon name="add-circle" class="padding-right-40" slot="end"></ion-icon>
     </ion-item>
   </div>
-
-  <div class="center">    
-    <ion-button size="small" shape="round" class="center bold gris-background" routerLink="/all-pedido">Mostrar todos</ion-button>
-  </div>
-  
-  <div class="left bold padding-top-20 padding-left blackText">Hoy: 
-    <ion-label>{{ fecha | date: 'yyyy-MM-dd'}}</ion-label>
-  </div>
+ 
    <div class="center padding-top-20">
      <ion-grid *ngFor="let pedido of pedidos">
        <ion-row>

@@ -40,15 +40,22 @@ inicio() {
       var idUsuario=inv['idUsuario'];
       var pass=inv['contrasena'];
       var nombre=inv['nombre'];
-      console.log(idUsuario,pass);
+      var tipoUsuario=inv['tipoUsuario'];
+      console.log(idUsuario,pass,tipoUsuario);
         this.storage.set('contrasena',pass);
         this.storage.set('idUsuario', idUsuario);
         this.storage.set('nombre', nombre);
+        this.storage.set('tipoUsuario', tipoUsuario);
         if(idUsuario != 0){
           if(idUsuario == -2){
             this.mensaje();
           } else {
+            if(tipoUsuario == "Administrador") {
               this.route.navigateByUrl('/inicio');
+            }
+            if(tipoUsuario == "Empleado") {
+              this.route.navigateByUrl('/home-empleado');
+            }  
             }
         } else {
           this.presentToast();
