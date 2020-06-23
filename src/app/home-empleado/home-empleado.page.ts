@@ -57,6 +57,13 @@ export class HomeEmpleadoPage implements OnInit {
   ngOnInit() {
   }
   
+  close(vinculo:string){
+    console.log(vinculo);
+    this.storage.set('contrasena',"");
+    this.storage.set('idUsuario',"");
+    this.route.navigateByUrl(vinculo);
+  }
+  
   ionViewWillenter() {
     this.getNewID();
   }

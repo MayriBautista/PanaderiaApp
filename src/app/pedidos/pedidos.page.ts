@@ -239,7 +239,8 @@ export class PedidosPage implements OnInit {
           this.alerta("Actualizado con éxito.");
           this.mostrarDatos();
         } else {
-          this.alerta("No se pudo modificar, intente mas tarde");
+          //this.alerta("No se pudo modificar, intente mas tarde");
+          this.mostrarDatos();
         }
       },
       (error) => {

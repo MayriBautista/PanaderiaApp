@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="center padding-top-10">
    <div class="bold">Ventas del día</div>
   </div>
@@ -16,13 +19,13 @@
     <ion-grid>
       <ion-row>
         <ion-col class="colGris center">
-          Fecha
+          Vendedor
         </ion-col>
         <ion-col class="colGris center">
           No. Venta
         </ion-col>
         <ion-col class="colGris center">
-          Vendedor
+          Fecha
         </ion-col>
         <ion-col class="colGris center">
           Total
@@ -31,13 +34,13 @@
 
       <ion-row *ngFor="let venta of ventas">
         <ion-col>
-          {{venta.fecha}}
+          {{venta.nombre}}
         </ion-col>
         <ion-col>
           {{venta.idVenta}}
         </ion-col>
-        <ion-col>
-          {{venta.nombre}}
+        <ion-col>          
+          {{venta.fecha}}
         </ion-col>
         <ion-col>
           {{venta.total}}
@@ -65,6 +68,10 @@
     <ion-label>Total: </ion-label>
     <ion-label>{{t}}</ion-label> 
   </ion-item>
+
+  <div class="padding-top-30 center padding">
+    <ion-button expand="block" shape="round" class="center bold gris-background" (click)="presentAlertConfirm()">Eliminar todas las ventas</ion-button>
+  </div>
 
   <div class="center padding-top-30">
     <div class="bold">Restantes del día</div>

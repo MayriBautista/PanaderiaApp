@@ -10,6 +10,7 @@ export class HttpService {
   //httpConexion = "https://loschenchos.000webhostapp.com/panaderiaLaravel/";
   httpConexion = "http://127.0.0.1:8000/";
 
+  
   //LOGIN
   login(nombre: string, contra: string) {
     var url = this.httpConexion + 'login/' + nombre + '/' + contra;
@@ -452,6 +453,30 @@ export class HttpService {
 
   mostrarTotalV() {
     var url = this.httpConexion + 'mostrarTotalV/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  eliminarVentas() {
+    var url = this.httpConexion + 'eliminarV/';
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  nohayProducto(idProducto:string) {
+    var url = this.httpConexion + 'nohayProducto/' + idProducto;
     return new Promise((resolve, reject) => {
       this.http.get(url)
         .subscribe(data => {

@@ -21,7 +21,7 @@ export class InicioPage implements OnInit {
   idProducto:string;
   idUsuario:string;
   descripcion:string;
-  idVenta:any;
+  idVenta:any = "0";
   precio:any;
   vprecio:string;
   cantidad:any = "1";
@@ -43,18 +43,26 @@ export class InicioPage implements OnInit {
   ) { 
     storage.get("idUsuario").then((val) => {
       console.log('idUsuario', val);
+      this.getVenta(this.idVenta);
       this.idUsuario = val;
     });
     this.storage.get('idVenta').then((val)=> {
-      console.log('idVenta',val);
-      this.idVenta = val;
-      this.getNewID();
+      console.log('idVenta',val);      
+      this.idVenta = val;       
       this.getVenta(this.idVenta);
+      this.getNewID();     
     });
     this.mostrarDatos();
     this.getVenta(this.idVenta);
   }
 
+  close(vinculo:string){
+    console.log(vinculo);
+    this.storage.set('contrasena',"");
+    this.storage.set('idUsuario',"");
+    this.route.navigateByUrl(vinculo);
+  }
+  
   ionViewWillenter() {
     this.getNewID();
   }
@@ -82,6 +90,21 @@ export class InicioPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  nohayProducto(idProducto) {
+    this.http.nohayProducto(idProducto).then(
+      (inv) => {
+        console.log(inv);
+        var resultado;
+
+        resultado = inv['resultado'];
+        if(resultado == "si hay"){
+          this.mostrarP(idProducto);
+        }else if(resultado == "no hay"){
+          this.mensajeToast("No hay producto");
+        }
+      });
   }
 
   registrarVentaP(idVenta){
@@ -208,6 +231,8 @@ export class InicioPage implements OnInit {
       });
   }
 
+
+
   getNewID(){
     this.http.getNewID().then( 
       (inv) => {
@@ -243,7 +268,8 @@ export class InicioPage implements OnInit {
           this.alerta("Eliminado correctamente");
           this.getVenta(this.idVenta);
         } else {
-          this.alerta("No se pudo eliminar, intente mas tarde");
+          this.getVenta(this.idVenta);
+          //this.alerta("No se pudo eliminar, intente mas tarde");
         }
       },
       (error) => {

@@ -21,8 +21,11 @@
    <div class="center padding-top-20">
      <ion-grid>
        <ion-row>
-         <ion-col class="colGris center">
-           Descripción
+        <ion-col class="colGris center">
+          Fecha
+        </ion-col> 
+        <ion-col class="colGris center">
+           Tipo
          </ion-col>
          <ion-col class="colGris center">
            Responsable
@@ -33,6 +36,9 @@
        </ion-row>
  
        <ion-row *ngFor="let gasto of gastos">
+        <ion-col>
+          {{gasto.fecha}}
+         </ion-col>
          <ion-col>
           {{gasto.descripcion}}
          </ion-col>

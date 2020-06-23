@@ -28,6 +28,15 @@ export class VentasPage implements OnInit {
   ngOnInit() {
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.mostrarDatos();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 500);
+  }
+
   mostrarDatos(){
     this.http.mostrarProductos().then( 
       (res) => {
@@ -39,6 +48,64 @@ export class VentasPage implements OnInit {
         alert("Verifica que cuentes con internet");
       }
     );
+  }
+
+  eliminarDatos(){
+    this.http.eliminarVentas().then( 
+      (inv) => {
+        console.log(inv);
+        var estado = inv['resultado'];
+        if (estado == "eliminado"){
+          this.alerta("Eliminado correctamente");
+          this.ventasTotales();
+          this.mostrarTotalV();
+          this.mostrarDatos();
+        } else {
+          this.ventasTotales();
+          this.mostrarTotalV();
+          this.mostrarDatos();
+          //this.alerta("No se pudo eliminar, intente mas tarde");
+        }
+      }, 
+      (error) => {
+        console.log("Error" + JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
+      }
+    );
+  }
+
+  async alerta(mensaje) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      position: 'middle',
+      duration: 4000
+    });
+    toast.present();
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Las ventas se eliminan una vez que se han terminado todos los productos',
+      message: '¿Está seguro de que se han terminado todos los productos? De lo contrario se eliminarán todas las entradas.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.eliminarDatos();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   ventasTotales(){
